@@ -8,12 +8,11 @@
   <%= @post.details %>
 </p>
 
+<%= link_to "Publish Post", publish_post_path(@post), method: :post if !@post.publish %>
 
 <%= render @post.comments %>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

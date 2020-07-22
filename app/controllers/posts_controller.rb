@@ -39,6 +39,16 @@ class PostsController < ApplicationController
 	  @posts = Post.all
 	end
 
+  def publish_post
+    @post = Post.find(params[:id])
+    @post.publish = !@post.publish
+    if @post.save
+      redirect_to post_path(@post), notice: "Post Published Successfully!"
+    else
+      redirect_to post_path(@post), notice: "Something Went Wrong!"
+    end
+  end
+
  private
 
   def post_params
