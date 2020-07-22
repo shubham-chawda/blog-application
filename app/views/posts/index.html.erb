@@ -12,11 +12,11 @@
       <td><%= post.title %></td>
       <td><%= post.details %></td>
       <td><%= post.user.name %></td>
-      <td><%= link_to 'Show', post_path(post) %></td>
+      <td><%= link_to 'Show', post_path(post), class: "btn btn-primary" %></td>
 
       <% if post.user == current_user && !post.publish %>
-      <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      <td><%= link_to 'Destroy', post_path(post),
+      <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-success" %></td>
+      <td><%= link_to 'Destroy', post_path(post), class: "btn btn-danger",
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
       <% end %>
@@ -24,4 +24,4 @@
   <% end %>
 </table>
 
-<%= link_to 'New post', new_post_path %>
+<%= link_to 'New post', new_post_path, class: "btn btn-primary" %>
