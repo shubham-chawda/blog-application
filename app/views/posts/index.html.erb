@@ -12,6 +12,7 @@
       <td><%= post.title %></td>
       <td><%= post.details %></td>
       <td><%= post.user.name %></td>
+      <%# <!-- <td><%= link_to "Follow", follows_path(:follow_id => current_user), :method => :post %></td> --> %>
       <td><%= link_to 'Show', post_path(post), class: "btn btn-primary" %></td>
 
       <% if post.user == current_user && !post.publish %>
@@ -23,5 +24,7 @@
     </tr>
   <% end %>
 </table>
+
+<%= will_paginate @posts %><br>
 
 <%= link_to 'New post', new_post_path, class: "btn btn-primary" %>
