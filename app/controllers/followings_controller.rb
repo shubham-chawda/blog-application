@@ -12,8 +12,7 @@ class FollowingsController < ApplicationController
   end
 
   def destroy
-    # @friendship = current_user.followings.find(params[:id])
-    @following = Following.find_by(follower_id: params[:id])
+    @following = Following.find_by(follower_id: params[:follower_id])
     if @following
       @following.destroy
       flash[:notice] = "Remove from following list"

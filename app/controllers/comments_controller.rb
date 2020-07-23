@@ -1,20 +1,35 @@
 class CommentsController < ApplicationController
 
+  before_action :find_comment_of_post, only: [:edit, :update, :destroy]
+
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
-    redirect_to post_path(@post)
+    @comment = @post.comments.build(comment_params)
+    @comment.user_id = current_user.id
+    if @comment.save
+      redirect_to post_path(@post), notice: "Comment Created Successfully"
+    else
+      redirect_to post_path(@post), notice: "Something went wrong"
+    end
  	end
 
+  def edit
+  end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_to post_path(@post), notice: "Updated Successfully"
+    else
+      redirect_to post_path(@post), notice: "You are not authorized to edit this comment"
+    end
+  end
+
  	def destroy
- 		@post = Post.find(params[:post_id])
- 		if current_user == @post.user
-	 		@comment = @post.comments.find(params[:id])
-	 		@comment.destroy
-	    	redirect_to post_path(@post)
-	    else
-	    	redirect_to post_path(@post), notice: "You are not authorized to delete that comment"
-	    end
+ 		if @comment.destroy
+	    redirect_to post_path(@post), notice: "Comment deleted Successfully"
+	  else
+	   	redirect_to post_path(@post), notice: "You are not authorized to delete this comment"
+	  end
  	end
 
  private
@@ -22,4 +37,8 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:body)
     end
 
+    def find_comment_of_post
+      @post = Post.find(params[:post_id])
+      @comment = @post.comments.find(params[:id])
+    end
 end
