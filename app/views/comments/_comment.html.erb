@@ -1,6 +1,5 @@
-<p>
+<br><br><p>
   <strong>Commenter:</strong>
-  <%= binding.pry %>
   <%= comment.user.name %>
 </p>
 
@@ -9,8 +8,11 @@
   <%= comment.body %>
 </p>
 
+<% if current_user == comment.user %>
 <p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
+  <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class: "btn btn-primary" %>
+  <%= link_to 'Destroy Comment', [comment.post, comment], class: "btn btn-danger",
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
 </p>
+<% end %>

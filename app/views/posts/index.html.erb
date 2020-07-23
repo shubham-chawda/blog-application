@@ -11,8 +11,7 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.details %></td>
-      <td><%= post.user.name %></td>
-      <%# <!-- <td><%= link_to "Follow", follows_path(:follow_id => current_user), :method => :post %></td> --> %>
+      <td><%= link_to "#{post.user.name}", user_post_path(post) %></td>
       <td><%= link_to 'Show', post_path(post), class: "btn btn-primary" %></td>
 
       <% if post.user == current_user && !post.publish %>

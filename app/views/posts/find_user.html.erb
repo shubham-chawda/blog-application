@@ -7,9 +7,11 @@
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
-<% if current_user.followings.present? && current_user.followings.first.follower == @user %>
-  <%= link_to "Unfollow",following_path, :method => :delete, class: "btn btn-primary" %>
-<% else %>
-  <%= link_to "Follow", followings_path(:follower_id => @user), :method => :post, class: "btn btn-primary" %>
+<% unless current_user == @user %>
+  <% if current_user.followings.present? && current_user.followings.map(&:follower_id).include?(@user.id) %>
+    <%= link_to "Unfollow",following_path(:follower_id => @user), :method => :delete, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "Follow", followings_path(:follower_id => @user), :method => :post, class: "btn btn-primary" %>
+  <% end %>
 <% end %>
 <%= link_to 'Back', posts_path, class: "btn btn-primary" %>

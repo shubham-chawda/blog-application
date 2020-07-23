@@ -8,7 +8,7 @@
   <%= @post.details %>
 </p>
 
-<%= link_to "Publish Post", publish_post_path(@post), class: "float-right btn btn-primary", method: :post if !@post.publish %>
+<%= link_to "Publish Post", publish_post_path(@post), class: "float-right btn btn-primary", method: :post if @post.user == current_user && !@post.publish %>
 
 <%= render @post.comments %>
 
