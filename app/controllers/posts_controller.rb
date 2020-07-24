@@ -35,7 +35,9 @@ class PostsController < ApplicationController
 	end
 
 	def index
-	  @posts = Post.paginate(:page => params[:page], per_page: 2).where(publish: true)
+	  # @posts = Post.paginate(:page => params[:page], per_page: 3).where(publish: true)
+    @posts = current_user.posts + Post.other_user(current_user)
+    @posts = (current_user.posts.paginate(:page => params[:page]) + Post.other_user(current_user).paginate(:page => params[:page]))
 	end
 
   def publish_post
