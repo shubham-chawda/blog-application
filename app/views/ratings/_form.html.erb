@@ -1,0 +1,10 @@
+<%= form_with(model: [ @post, @post.ratings.build ], local: true) do |form| %>
+  <% unless @post.ratings.map(&:user_id).include?(current_user.id) %>
+    <p>
+      <%= form.number_field :star %>
+    </p>
+    <p>
+      <%= form.submit "Submit Rating" %>
+    </p>
+  <% end %>
+<% end %>

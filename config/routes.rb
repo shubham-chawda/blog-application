@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get "user" => "posts#find_user"
       post "publish" => "posts#publish_post"
     end
+    resources :ratings, only: [:create, :destroy]
   	resources :comments
   end
 

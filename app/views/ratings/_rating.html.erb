@@ -1,0 +1,13 @@
+<br><br>
+  <ul>
+    <% @post.ratings.each do |rating|  %>
+      <li><%= "#{rating.user.name} give #{rating.star} rating to this post" %></li>
+        <%= link_to 'Remove Rating', post_rating_path(@post, rating), class: "btn btn-danger",
+                     method: :delete,
+                     data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </ul>
+
+<%# if current_user.followings.map(&:follower_id).include?(@post.user.id) %>
+
+<%# end %>

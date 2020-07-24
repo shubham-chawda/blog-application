@@ -11,8 +11,10 @@
 <%= link_to "Publish Post", publish_post_path(@post), class: "float-right btn btn-primary", method: :post if @post.user == current_user && !@post.publish %>
 
 <%= render @post.comments %>
+<%= render @post.ratings %>
 
 
 <%= render 'comments/form' %>
+<%= render 'ratings/form' %>
 
 <%= link_to 'Back', posts_path, class: "btn btn-primary" %>
