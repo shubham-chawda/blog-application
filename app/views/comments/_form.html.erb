@@ -1,11 +1,12 @@
 
 <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-
-  <p>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-
+  <% if current_user.followings.map(&:follower_id).include?(@post.user.id) || current_user == @post.user %>
+  <h2>Add a comment:</h2>
+    <p>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
 <% end %>

@@ -8,9 +8,11 @@
   <%= comment.body %>
 </p>
 
+<% if current_user.followings.map(&:follower_id).include?(@post.user.id) %>
 <p>
   <%= link_to "Edit", edit_post_comment_path(comment.post, comment), class: "btn btn-primary" if can? :update, comment %>
   <%= link_to 'Destroy Comment', [comment.post, comment], class: "btn btn-danger",
                method: :delete,
                data: { confirm: 'Are you sure?' } if can? :destroy, comment %>
 </p>
+<% end %>
